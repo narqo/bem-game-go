@@ -1,0 +1,13 @@
+{
+  "name": "bem-game-go",
+  "version": "0.1.0",
+  "authors": [
+    "Vladimir Varankin <nek.narqo@gmail.com> (http://github.com/narqo)"
+  ],
+  "description": "Board game Go written with bem-core",
+  "dependencies": {
+    "bem-core": "bem/bem-core#v2"
+  },
+  "license": "WTFPL",
+  "private": true
+}

@@ -1,0 +1,7 @@
+.bem/cache
+libs
+node_modules
+
+bundles/*/*
+!bundles/*/*.bemjson.js
+!bundles/.bem/*

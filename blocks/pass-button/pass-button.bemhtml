@@ -1,0 +1,5 @@
+block('pass-button')(
+    tag()('button'),
+    js()(true),
+    content()('Pass')
+)

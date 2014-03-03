@@ -1,0 +1,25 @@
+.intersection
+{
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.0588235);
+
+    width: 39px;
+    height: 39px;
+
+    position: absolute;
+}
+
+.intersection_color_white,
+.intersection_color_black
+{
+    border-radius: 100%;
+}
+
+.intersection_color_white
+{
+    background: #0c0;
+}
+
+.intersection_color_black
+{
+    background: #000;
+}
