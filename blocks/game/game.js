@@ -81,7 +81,7 @@ provide(inherit({
         while(stone = queue.pop()) {
             if(visited[stone]) continue;
 
-            this._getAdjacentIntersections(stone[i], stone[j]).forEach(function(n) {
+            this._getAdjacentIntersections(stone[0], stone[1]).forEach(function(n) {
                 var state = this.getStateByPos(n);
                 if(state === EMPTY) {
                     liberties++;
