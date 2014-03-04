@@ -1,15 +1,6 @@
-[{
+({
     shouldDeps : [
-        { block : 'i-bem', elems : ['dom', 'html'] },
-        'game',
-        'point',
-        'alert',
-        'pass-button'
+        { block : 'i-bem', elems : 'dom' },
+        'point'
     ]
-},
-{
-    tech : 'js',
-    shouldDeps : {
-        tech : 'bemhtml'
-    }
-}]
+})

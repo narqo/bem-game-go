@@ -1,0 +1,9 @@
+.alert
+{
+    display: none;
+
+    position: absolute;
+
+    height: 30px;
+    margin-top: -30px;
+}

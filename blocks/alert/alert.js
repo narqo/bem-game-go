@@ -1,8 +1,13 @@
 modules.define('alert', ['i-bem__dom'], function(provide, BEMDOM) {
 
 provide(BEMDOM.decl(this.name, {
-    notify : function(msg) {
+    show : function(msg) {
         BEMDOM.update(this.domElem, msg);
+        this.setMod('visible');
+    },
+
+    hide : function() {
+        this.delMod('visible');
     }
 }, {
     build : function() {

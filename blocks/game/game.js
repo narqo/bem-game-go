@@ -7,12 +7,13 @@ var EMPTY = 0,
 provide(inherit({
     __constructor : function(size) {
         this._currentColor = BLACK;
+        this._gameOver = false;
         this._lastMovePassed = false;
         this._inAtari = false;
         this._attempedSuicide = false;
 
         this._size = size;
-        this._game = this._createBoard(size);
+        this._board = this._createBoard(size);
     },
 
     _createBoard : function(size) {
@@ -35,6 +36,10 @@ provide(inherit({
         return this._attempedSuicide;
     },
 
+    isOver : function() {
+        return this._gameOver;
+    },
+
     getSize : function() {
         return this._size;
     },
@@ -44,7 +49,7 @@ provide(inherit({
     },
 
     getStateByPos : function(i, j) {
-        var board = this._game;
+        var board = this._board;
         return typeof j === 'undefined'?
             board[i[0]][i[1]] :
             board[i][j];
@@ -112,7 +117,8 @@ provide(inherit({
     },
 
     play : function(i, j) {
-        console.log('Played at ' + i + ',' + j);
+        if(this._gameOver)
+            throw new Error('The game is over already');
 
         this._attempedSuicide = this._inAtari = false;
 
@@ -121,7 +127,7 @@ provide(inherit({
             return false;
         }
 
-        var color = this._game[i][j] = this._currentColor,
+        var color = this._board[i][j] = this._currentColor,
             captured = [],
             neighbors = this._getAdjacentIntersections(i, j),
             atari = false;
@@ -143,14 +149,14 @@ provide(inherit({
 
         // detect suicide
         if(captured.length === 0 && this._getGroup(i, j).liberties === 0) {
-            this._game[i][j] = EMPTY;
+            this._board[i][j] = EMPTY;
             this._attempedSuicide = true;
             return false;
         }
 
         captured.forEach(function(group) {
             group.stones.forEach(function(stone) {
-                this._game[stone[0]][stone[1]] = EMPTY;
+                this._board[stone[0]][stone[1]] = EMPTY;
             }, this);
         }, this);
 
@@ -163,7 +169,7 @@ provide(inherit({
     },
 
     endGame : function() {
-        console.log('GAME OVER');
+        this._gameOver = true;
     }
 }, {
     EMPTY : EMPTY,

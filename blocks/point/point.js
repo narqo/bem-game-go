@@ -37,7 +37,8 @@ provide(BEMDOM.decl(this.name, {
         var state = game.getStateByPos(row, col),
             mods = {};
 
-        state === Game.EMPTY || (mods.color = state === Game.BLACK? 'black' : 'white');
+        state === Game.EMPTY ||
+            (mods.color = state === Game.BLACK? 'black' : 'white');
 
         return {
             block : this.getName(),

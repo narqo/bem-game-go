@@ -1,13 +1,11 @@
 .board
 {
-}
-
-.board__grid
-{
     background: #e9c372;
     border: 1px solid #522;
 
-    user-select: none;
+    -webkit-user-select: none;
 
     position: relative;
+
+    margin-top: 30px;
 }

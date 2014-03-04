@@ -1,5 +1,6 @@
 ({
     shouldDeps : [
-        { block : 'i-bem', elems : ['dom', 'html'] }
+        { block : 'i-bem', elems : 'dom' },
+        { mod : 'visible' }
     ]
 })
