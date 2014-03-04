@@ -2,7 +2,7 @@
     shouldDeps : [
         { block : 'i-bem', elems : ['dom', 'html'] },
         'game',
-        'intersection',
+        'point',
         'alert',
         'pass-button'
     ]

@@ -1,6 +1,6 @@
-modules.define({ block : 'pass-button' }, function(provide) {
+modules.define('pass-button', ['i-bem__dom'], function(provide, BEMDOM) {
 
-provide({
+provide(BEMDOM.decl(this.name, {
     _onPointerClick : function() {
         this.emit('click');
     }
@@ -14,6 +14,6 @@ provide({
     build : function() {
         return { block : this.getName() };
     }
-});
+}));
 
 });

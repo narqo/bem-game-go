@@ -1,9 +1,9 @@
-modules.define(
-    { block : 'intersection' },
-    ['game'],
-    function(provide, Game) {
+modules.define('point', ['i-bem__dom', 'game'], function(provide, BEMDOM, Game) {
 
-provide({
+/** {Number} css size of the point */
+var POINT_SIZE = 30;
+
+provide(BEMDOM.decl(this.name, {
     onSetMod : {
         js : {
             inited : function() {
@@ -25,6 +25,8 @@ provide({
         this.emit('click');
     }
 }, {
+    POINT_SIZE : POINT_SIZE,
+
     live : function() {
         this.liveBindTo('pointerclick', function() {
             this._onPointerClick();
@@ -33,19 +35,19 @@ provide({
 
     build : function(game, row, col) {
         var state = game.getStateByPos(row, col),
-            color = state === Game.EMPTY?
-                '' :
-                (state === Game.BLACK? 'black' : 'white');
+            mods = {};
+
+        state === Game.EMPTY || (mods.color = state === Game.BLACK? 'black' : 'white');
 
         return {
-            block : 'intersection',
-            mods : { color : color },
+            block : this.getName(),
+            mods : mods,
             js : {
                 col : col,
                 row : row
             }
         };
     }
-});
+}));
 
 });

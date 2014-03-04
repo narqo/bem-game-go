@@ -1,0 +1,57 @@
+.point
+{
+    width: 30px;
+    height: 30px;
+
+    position: absolute;
+}
+
+.point:after,
+.point:before
+{
+    content: '';
+    margin: auto;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    background-color: #522;
+}
+
+.point:after
+{
+    width: 1px;
+    height: 100%;
+}
+
+.point:before
+{
+    width: 100%;
+    height: 1px;
+}
+
+.point_is-first-row:after
+{
+    top: 50%;
+    height: 50%;
+}
+.point_is-last-row:after
+{
+    top: -50%;
+    height: 50%;
+}
+
+.point_is-first-col:before
+{
+    left: 50%;
+    width: 50%;
+}
+
+.point_is-last-col:before
+{
+    left: -50%;
+    width: 50%;
+}

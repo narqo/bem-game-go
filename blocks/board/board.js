@@ -1,14 +1,14 @@
 modules.define(
-    { block : 'board' },
-    ['i-bem__dom', 'BEMHTML', 'alert', 'pass-button', 'intersection', 'game'],
-    function(provide, BEMDOM, BEMHTML, Alert, PassButton, Intersection, Game) {
+    'board',
+    ['i-bem__dom', 'BEMHTML', 'alert', 'pass-button', 'point', 'game'],
+    function(provide, BEMDOM, BEMHTML, Alert, PassButton, Point, Game) {
 
-// размер игрового поля
-var GAME_SIZE = 5,
-    // размер клетки
-    GRID_SIZE = 40;
+/** {Number} size of the grid */
+var GAME_SIZE = 9,
+    pointSize = Point.POINT_SIZE,
+    gridSize = GAME_SIZE * pointSize;
 
-provide({
+provide(BEMDOM.decl(this.name, {
     onSetMod : {
         js : {
             inited : function() {
@@ -17,7 +17,7 @@ provide({
 
                 this._render();
 
-                Intersection.on(this.elem('container'), 'click', this._onIntersectionClick, this);
+                Point.on(this.elem('grid'), 'click', this._onPointClick, this);
                 PassButton.on('click', this._onPassClick, this);
             }
         }
@@ -35,7 +35,7 @@ provide({
         this._game.pass();
     },
 
-    _onIntersectionClick : function(e) {
+    _onPointClick : function(e) {
         var game = this._game,
             alert = this._getAlert(),
             intersection = e.target,
@@ -47,44 +47,53 @@ provide({
         game.isAttemptedSuicide() && alert.notify('SUICIDE');
 
         succeed &&
-            BEMDOM.update(this.elem('container'), BEMHTML.apply(this.__self.updateContainer(this._game)));
+            BEMDOM.update(this.elem('grid'), BEMHTML.apply(this.__self.updateGrid(this._game)));
     }
 }, {
     live : false,
 
     build : function(game) {
-        var containerSize = GRID_SIZE * GAME_SIZE;
         return [
             Alert.build(game),
             PassButton.build(game),
             {
                 block : this.getName(),
-                elem : 'container',
+                elem : 'grid',
                 attrs : {
-                    style : 'width: ' + containerSize + 'px; height: ' + containerSize + 'px;'
+                    style : 'width: ' + gridSize + 'px; height: ' + gridSize + 'px;'
                 },
-                content : this.updateContainer(game)
+                content : this.updateGrid(game)
             }
         ];
     },
 
-    updateContainer : function(game) {
+    updateGrid : function(game) {
         var size = game.getSize(),
-            intersections = [],
-            item;
+            lastIdx = size - 1,
+            points = [],
+            item, mods;
 
-        for(var i = 0; i < size; i++) {
-            for(var j = 0; j < size; j++) {
-                item = Intersection.build(game, i, j);
+        for(var row = 0; row < size; row++) {
+            for(var col = 0; col < size; col++) {
+                item = Point.build(game, row, col);
+                mods = item.mods;
+
+                row === 0 && (mods['is-first-row'] = true);
+                row === lastIdx && (mods['is-last-row'] = true);
+
+                col === 0 && (mods['is-first-col'] = true);
+                col === lastIdx && (mods['is-last-col'] = true);
+
                 item.attrs = {
-                    style : 'top: ' + i * GRID_SIZE + 'px; left: ' + j * GRID_SIZE + 'px;'
+                    style : 'top: ' + row * pointSize + 'px; left: ' + col * pointSize + 'px;'
                 };
-                intersections.push(item);
+
+                points.push(item);
             }
         }
 
-        return intersections;
+        return points;
     }
-});
+}));
 
 });

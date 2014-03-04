@@ -1,4 +1,13 @@
-.board__container
+.board
 {
+}
+
+.board__grid
+{
+    background: #e9c372;
+    border: 1px solid #522;
+
+    user-select: none;
+
     position: relative;
 }

@@ -1,9 +1,6 @@
-modules.define(
-    { block : 'alert' },
-    ['i-bem__dom'],
-    function(provide, BEMDOM) {
+modules.define('alert', ['i-bem__dom'], function(provide, BEMDOM) {
 
-provide({
+provide(BEMDOM.decl(this.name, {
     notify : function(msg) {
         BEMDOM.update(this.domElem, msg);
     }
@@ -11,6 +8,6 @@ provide({
     build : function() {
         return { block : this.getName() };
     }
-});
+}));
 
 });
