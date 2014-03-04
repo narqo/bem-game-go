@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/narqo/bem-game-go",
   "devDependencies": {
-    "bower": "~1.2.8",
     "bower-npm-install": "~0.5.4",
     "bem": "~0.7.8"
   },
