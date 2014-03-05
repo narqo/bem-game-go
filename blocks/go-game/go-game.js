@@ -10,32 +10,19 @@ provide(BEMDOM.decl(this.name, {
         js : {
             inited : function() {
                 this._game = new Game(GAME_SIZE);
-                this._alert = null;
-                this._board = null;
 
-                this._start();
+                BEMDOM.update(this.domElem, BEMHTML.apply(this.__self.build(this._game)));
+
+                this._alert = null;
+                this._board = this
+                    .findBlockInside('board')
+                    .on('play', this._onPlay, this);
             }
         }
     },
 
     _getAlert : function() {
         return this._alert || (this._alert = this.findBlockInside('alert'));
-    },
-
-    _getBoard : function() {
-        return this._board || (this._board = this.findBlockInside('board'));
-    },
-
-    _start : function() {
-        BEMDOM.update(this.domElem, BEMHTML.apply(this.__self.build(this._game)));
-
-        this
-            ._getBoard()
-            .on('play', this._onPlay, this);
-    },
-
-    _render : function() {
-        BEMDOM.update(this._getBoard().domElem, BEMHTML.apply(Board.updateGrid(this._game)));
     },
 
     _notify : function() {
@@ -60,7 +47,7 @@ provide(BEMDOM.decl(this.name, {
 
         this._notify();
 
-        isPlayed && this._render();
+        isPlayed && this._board.updateBoard(this._game);
     },
 
     _onPassClick : function() {

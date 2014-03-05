@@ -4,8 +4,17 @@ modules.define('board', ['i-bem__dom', 'point'], function(provide, BEMDOM, Point
 var POINT_SIZE = Point.POINT_SIZE;
 
 provide(BEMDOM.decl(this.name, {
-    _onPointClick : function(e) {
-        var point = e.target;
+    _getPoints : function() {
+        return this._points || (this._points = this.findBlocksInside('point'));
+    },
+
+    updateBoard : function(game) {
+        this._getPoints().forEach(function(point) {
+            point.setState(game.getStateByPos(point.getRow(), point.getCol()));
+        });
+    },
+
+    _onPointClick : function(point) {
         this.emit('play', {
             row : point.getRow(),
             col : point.getCol()
@@ -14,7 +23,7 @@ provide(BEMDOM.decl(this.name, {
 }, {
     live : function() {
         this.liveInitOnBlockInsideEvent('click', 'point', function(e) {
-            this._onPointClick(e);
+            this._onPointClick(e.target);
         });
     },
 
@@ -25,11 +34,11 @@ provide(BEMDOM.decl(this.name, {
             attrs : {
                 style : 'width: ' + gridSize + 'px; height: ' + gridSize + 'px;'
             },
-            content : this.updateGrid(game)
+            content : this._fillBoad(game)
         };
     },
 
-    updateGrid : function(game) {
+    _fillBoad : function(game) {
         var size = game.getSize(),
             lastIdx = size - 1,
             points = [],
@@ -38,7 +47,7 @@ provide(BEMDOM.decl(this.name, {
         for(var row = 0; row < size; row++) {
             for(var col = 0; col < size; col++) {
                 item = Point.build(game, row, col);
-                mods = item.mods;
+                mods = item.mods || (item.mods = {});
 
                 row === 0 && (mods['is-first-row'] = true);
                 row === lastIdx && (mods['is-last-row'] = true);

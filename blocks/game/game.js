@@ -6,12 +6,11 @@ var EMPTY = 0,
 
 provide(inherit({
     __constructor : function(size) {
-        this._currentColor = BLACK;
-        this._gameOver = false;
         this._lastMovePassed = false;
         this._inAtari = false;
         this._attempedSuicide = false;
-
+        this._gameOver = false;
+        this._currentColor = BLACK;
         this._size = size;
         this._board = this._createBoard(size);
     },
@@ -24,7 +23,6 @@ provide(inherit({
                 board[i][j] = EMPTY;
             }
         }
-
         return board;
     },
 

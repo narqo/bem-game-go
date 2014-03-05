@@ -4,21 +4,22 @@ modules.define('point', ['i-bem__dom', 'game'], function(provide, BEMDOM, Game) 
 var POINT_SIZE = 30;
 
 provide(BEMDOM.decl(this.name, {
-    onSetMod : {
-        js : {
-            inited : function() {
-                this._col = this.params.col;
-                this._row = this.params.row;
-            }
-        }
-    },
-
     getCol : function() {
-        return this._col;
+        return this.params.col;
     },
 
     getRow : function() {
-        return this._row;
+        return this.params.row;
+    },
+
+    getState : function() {
+        return this.getMod('color');
+    },
+
+    setState : function(state) {
+        state === Game.EMPTY?
+            this.delMod('color') :
+            this.setMod('color', state === Game.BLACK? 'black' : 'white');
     },
 
     _onPointerClick : function() {
