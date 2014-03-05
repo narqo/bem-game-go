@@ -17,10 +17,10 @@ provide(inherit({
 
     _createBoard : function(size) {
         var board = [];
-        for(var i = 0; i < size; i++) {
-            board[i] = [];
-            for(var j = 0; j < size; j++) {
-                board[i][j] = EMPTY;
+        for(var col = 0; col < size; col++) {
+            board[col] = [];
+            for(var row = 0; row < size; row++) {
+                board[col][row] = EMPTY;
             }
         }
         return board;
@@ -34,7 +34,7 @@ provide(inherit({
         return this._attempedSuicide;
     },
 
-    isOver : function() {
+    isGameOver : function() {
         return this._gameOver;
     },
 
@@ -46,11 +46,11 @@ provide(inherit({
         return this._currentColor;
     },
 
-    getStateByPos : function(i, j) {
+    getStateByPos : function(colOrPos, row) {
         var board = this._board;
-        return typeof j === 'undefined'?
-            board[i[0]][i[1]] :
-            board[i][j];
+        return typeof row === 'undefined'?
+            board[colOrPos[0]][colOrPos[1]] :
+            board[colOrPos][row];
     },
 
     _switchPlayer : function() {
@@ -114,20 +114,20 @@ provide(inherit({
         this._switchPlayer();
     },
 
-    play : function(i, j) {
+    play : function(col, row) {
         if(this._gameOver)
             throw new Error('The game is over already');
 
         this._attempedSuicide = this._inAtari = false;
 
-        if(this.getStateByPos(i, j) !== EMPTY) {
-            console.log('could not play in non empty position ' + i + ', ' + j);
+        if(this.getStateByPos(col, row) !== EMPTY) {
+            console.log('could not play in non empty position ' + col + ', ' + row);
             return false;
         }
 
-        var color = this._board[i][j] = this._currentColor,
+        var color = this._board[col][row] = this._currentColor,
             captured = [],
-            neighbors = this._getAdjacentIntersections(i, j),
+            neighbors = this._getAdjacentIntersections(col, row),
             atari = false;
 
         neighbors.forEach(function(n) {
@@ -146,8 +146,8 @@ provide(inherit({
         }, this);
 
         // detect suicide
-        if(captured.length === 0 && this._getGroup(i, j).liberties === 0) {
-            this._board[i][j] = EMPTY;
+        if(captured.length === 0 && this._getGroup(col, row).liberties === 0) {
+            this._board[col][row] = EMPTY;
             this._attempedSuicide = true;
             return false;
         }

@@ -2,6 +2,12 @@
 .point_color_black
 {
     border-radius: 50%;
+
+    box-sizing: border-box;
+
+    width: 28px;
+    height: 28px;
+    margin: 1px 0 0 1px;
 }
 
 .point_color_white:after,

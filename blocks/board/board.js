@@ -10,14 +10,14 @@ provide(BEMDOM.decl(this.name, {
 
     updateBoard : function(game) {
         this._getPoints().forEach(function(point) {
-            point.setState(game.getStateByPos(point.getRow(), point.getCol()));
+            point.setState(game.getStateByPos(point.getCol(), point.getRow()));
         });
     },
 
     _onPointClick : function(point) {
         this.emit('play', {
-            row : point.getRow(),
-            col : point.getCol()
+            col : point.getCol(),
+            row : point.getRow()
         });
     }
 }, {
@@ -44,19 +44,19 @@ provide(BEMDOM.decl(this.name, {
             points = [],
             item, mods;
 
-        for(var row = 0; row < size; row++) {
-            for(var col = 0; col < size; col++) {
-                item = Point.build(game, row, col);
+        for(var col = 0; col < size; col++) {
+            for(var row = 0; row < size; row++) {
+                item = Point.build(game, col, row);
                 mods = item.mods || (item.mods = {});
 
-                row === 0 && (mods['is-first-row'] = true);
-                row === lastIdx && (mods['is-last-row'] = true);
+                col === 0 && (mods['first-col'] = true);
+                col === lastIdx && (mods['last-col'] = true);
 
-                col === 0 && (mods['is-first-col'] = true);
-                col === lastIdx && (mods['is-last-col'] = true);
+                row === 0 && (mods['first-row'] = true);
+                row === lastIdx && (mods['last-row'] = true);
 
                 item.attrs = {
-                    style : 'top: ' + row * POINT_SIZE + 'px; left: ' + col * POINT_SIZE + 'px;'
+                    style : 'top: ' + col * POINT_SIZE + 'px; left: ' + row * POINT_SIZE + 'px;'
                 };
 
                 points.push(item);

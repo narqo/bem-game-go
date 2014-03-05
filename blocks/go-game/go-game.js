@@ -3,7 +3,7 @@ modules.define(
     ['i-bem__dom', 'BEMHTML', 'board', 'alert', 'pass-button', 'game'],
     function(provide, BEMDOM, BEMHTML, Board, Alert, PassButton, Game) {
 
-var GAME_SIZE = 9;
+var GAME_SIZE = 11;
 
 provide(BEMDOM.decl(this.name, {
     onSetMod : {
@@ -34,7 +34,7 @@ provide(BEMDOM.decl(this.name, {
             msg = 'ATARI';
         else if(game.isAttemptedSuicide())
             msg = 'SUICIDE';
-        else if(game.isOver())
+        else if(game.isGameOver())
             msg = 'GAME OVER';
 
         msg?
@@ -43,7 +43,7 @@ provide(BEMDOM.decl(this.name, {
     },
 
     _onPlay : function(e, data) {
-        var isPlayed = this._game.play(data.row, data.col);
+        var isPlayed = this._game.play(data.col, data.row);
 
         this._notify();
 

@@ -9,49 +9,44 @@
 .point:after,
 .point:before
 {
+    border: 1px solid #522;
+
     content: '';
-    margin: auto;
 
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-
-    background-color: #522;
 }
 
 .point:after
 {
-    width: 1px;
-    height: 100%;
+    border-width: 0 0 0 1px;
+    left: 50%;
 }
 
 .point:before
 {
-    width: 100%;
-    height: 1px;
+    border-width: 1px 0 0;
+    top: 50%;
 }
 
-.point_is-first-row:after
+.point_first-col:after
 {
     top: 50%;
-    height: 50%;
 }
-.point_is-last-row:after
+.point_last-col:after
 {
-    top: -50%;
-    height: 50%;
+    bottom: 50%;
 }
 
-.point_is-first-col:before
+.point_first-row:before
 {
     left: 50%;
-    width: 50%;
 }
 
-.point_is-last-col:before
+.point_last-row:before
 {
-    left: -50%;
-    width: 50%;
+    right: 50%;
 }
