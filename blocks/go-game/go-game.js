@@ -17,6 +17,10 @@ provide(BEMDOM.decl(this.name, {
                 this._board = this
                     .findBlockInside('board')
                     .on('play', this._onPlay, this);
+
+                this
+                    .findBlockInside('pass-button')
+                    .on('click', this._onPassClick, this);
             }
         }
     },
@@ -57,10 +61,14 @@ provide(BEMDOM.decl(this.name, {
     live : false,
 
     build : function(game) {
+        var block = this.getName();
         return [
-            Alert.build(game),
-            Board.build(game)
-        ]
+            { block : block, elem : 'board', content : [
+                Alert.build(game),
+                Board.build(game)
+            ] },
+            { block : block, elem : 'info', content : PassButton.build(game) }
+        ];
     }
 }));
 
