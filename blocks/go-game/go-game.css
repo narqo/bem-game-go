@@ -1,0 +1,10 @@
+.go-game
+{
+    display: table;
+}
+
+.go-game__board,
+.go-game__info
+{
+    display: table-cell;
+}
