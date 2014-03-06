@@ -106,12 +106,13 @@ provide(inherit({
 
     pass : function() {
         if(this._lastMovePassed) {
-            this.endGame();
-            return;
+            return this.endGame();
         }
 
         this._lastMovePassed = true;
         this._switchPlayer();
+
+        return this;
     },
 
     play : function(col, row) {
@@ -168,6 +169,7 @@ provide(inherit({
 
     endGame : function() {
         this._gameOver = true;
+        return this;
     }
 }, {
     EMPTY : EMPTY,

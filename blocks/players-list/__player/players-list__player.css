@@ -1,0 +1,14 @@
+.players-list__player
+{
+    padding: 10px 0;
+}
+
+.players-list__player_current:before
+{
+    content: '☛';
+
+    position: absolute;
+
+    line-height: 1;
+    margin-left: -1.3em;
+}

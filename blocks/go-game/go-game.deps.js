@@ -9,6 +9,7 @@
         'board',
         'alert',
         'pass-button',
+        'players-list'
     ]
 },
 {

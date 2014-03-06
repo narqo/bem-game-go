@@ -3,17 +3,19 @@ modules.define(
     ['i-bem__dom', 'BEMHTML', 'board', 'alert', 'pass-button', 'game'],
     function(provide, BEMDOM, BEMHTML, Board, Alert, PassButton, Game) {
 
-var GAME_SIZE = 11;
+var GAME_SIZE = 11,
+    PLAYERS_LIST_ID = 'playerslistid1';
 
 provide(BEMDOM.decl(this.name, {
     onSetMod : {
-        js : {
-            inited : function() {
+        'js' : {
+            'inited' : function() {
                 this._game = new Game(GAME_SIZE);
 
                 BEMDOM.update(this.domElem, BEMHTML.apply(this.__self.build(this._game)));
 
                 this._alert = null;
+                this._playersList = null;
                 this._board = this
                     .findBlockInside('board')
                     .on('play', this._onPlay, this);
@@ -27,6 +29,11 @@ provide(BEMDOM.decl(this.name, {
 
     _getAlert : function() {
         return this._alert || (this._alert = this.findBlockInside('alert'));
+    },
+
+    _getPlayersList : function() {
+        return this._playersList ||
+            (this._playersList = this.findBlockInside('players-list'));
     },
 
     _notify : function() {
@@ -47,15 +54,21 @@ provide(BEMDOM.decl(this.name, {
     },
 
     _onPlay : function(e, data) {
-        var isPlayed = this._game.play(data.col, data.row);
+        var game = this._game,
+            isPlayed = game.play(data.col, data.row);
 
         this._notify();
 
-        isPlayed && this._board.updateBoard(this._game);
+        if(isPlayed) {
+            this._board.updateBoard(game);
+            this._getPlayersList().updateInformer(game);
+        }
     },
 
     _onPassClick : function() {
-        this._game.pass();
+        this.
+            _getPlayersList()
+            .updateInformer(this._game.pass());
     }
 }, {
     live : false,
@@ -67,7 +80,27 @@ provide(BEMDOM.decl(this.name, {
                 Alert.build(game),
                 Board.build(game)
             ] },
-            { block : block, elem : 'info', content : PassButton.build(game) }
+            { block : block, elem : 'info', content : [
+                {
+                    block : 'players-list',
+                    js : { id : PLAYERS_LIST_ID },
+                    mix : {
+                        elem : 'player',
+                        mods : { color : 'black', current : true }
+                    },
+                    content : 'BLACK'
+                },
+                PassButton.build(game),
+                {
+                    block : 'players-list',
+                    js : { id : PLAYERS_LIST_ID },
+                    mix : {
+                        elem : 'player',
+                        mods : { color : 'white' }
+                    },
+                    content : 'WHITE'
+                }
+            ] }
         ];
     }
 }));
