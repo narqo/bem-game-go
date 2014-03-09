@@ -3,7 +3,8 @@
         { block : 'i-bem', elems : 'dom' },
         { elems : [
             'board',
-            'info'
+            'info',
+            'notification'
         ] },
         'game',
         'board',

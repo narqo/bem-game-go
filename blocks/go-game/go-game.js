@@ -1,10 +1,9 @@
 modules.define(
     'go-game',
-    ['i-bem__dom', 'BEMHTML', 'board', 'alert', 'pass-button', 'game'],
-    function(provide, BEMDOM, BEMHTML, Board, Alert, PassButton, Game) {
+    ['i-bem__dom', 'BEMHTML', 'board', 'alert', 'players-list', 'pass-button', 'game'],
+    function(provide, BEMDOM, BEMHTML, Board, Alert, PlayersList, PassButton, Game) {
 
-var GAME_SIZE = 11,
-    PLAYERS_LIST_ID = 'playerslistid1';
+var GAME_SIZE = 11;
 
 provide(BEMDOM.decl(this.name, {
     onSetMod : {
@@ -66,8 +65,8 @@ provide(BEMDOM.decl(this.name, {
     },
 
     _onPassClick : function() {
-        this.
-            _getPlayersList()
+        this
+            ._getPlayersList()
             .updateInformer(this._game.pass());
     }
 }, {
@@ -76,30 +75,11 @@ provide(BEMDOM.decl(this.name, {
     build : function(game) {
         var block = this.getName();
         return [
-            { block : block, elem : 'board', content : [
-                Alert.build(game),
-                Board.build(game)
-            ] },
+            { block : block, elem : 'notification', content : Alert.build(game) },
+            { block : block, elem : 'board', content : Board.build(game) },
             { block : block, elem : 'info', content : [
-                {
-                    block : 'players-list',
-                    js : { id : PLAYERS_LIST_ID },
-                    mix : {
-                        elem : 'player',
-                        mods : { color : 'black', current : true }
-                    },
-                    content : 'BLACK'
-                },
-                PassButton.build(game),
-                {
-                    block : 'players-list',
-                    js : { id : PLAYERS_LIST_ID },
-                    mix : {
-                        elem : 'player',
-                        mods : { color : 'white' }
-                    },
-                    content : 'WHITE'
-                }
+                PlayersList.build(game),
+                PassButton.build(game)
             ] }
         ];
     }

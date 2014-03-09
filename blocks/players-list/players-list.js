@@ -16,6 +16,24 @@ provide(BEMDOM.decl(this.name, {
             this.elem('player', 'color', game.getCurrentColor() === Game.BLACK? 'black' : 'white'),
             'current');
     }
+}, {
+    build : function(game) {
+        return {
+            block : this.getName(),
+            content : [
+                {
+                    elem : 'player',
+                    mods : { color : 'black', current : true },
+                    content : 'BLACK'
+                },
+                {
+                    elem : 'player',
+                    mods : { color : 'white' },
+                    content : 'WHITE'
+                }
+            ]
+        };
+    }
 }));
 
 });

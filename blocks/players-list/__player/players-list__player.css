@@ -1,6 +1,6 @@
 .players-list__player
 {
-    padding: 10px 0;
+    padding: 0 0 7px;
 }
 
 .players-list__player_current:before
