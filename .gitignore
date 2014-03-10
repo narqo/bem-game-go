@@ -6,3 +6,5 @@ bundles/*/*
 !bundles/*/*.bemjson.js
 !bundles/*/blocks
 !bundles/.bem/*
+
+/*.specs

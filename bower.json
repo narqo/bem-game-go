@@ -6,7 +6,10 @@
   ],
   "description": "Board game Go written with bem-core",
   "dependencies": {
-    "bem-core": "bem/bem-core#~2.0.0"
+    "bem-core": "bem/bem-core#^2.0.0"
+  },
+  "devDependencies": {
+    "bem-pr": "narqo/bem-pr#^0.7.x"
   },
   "license": "WTFPL",
   "private": true

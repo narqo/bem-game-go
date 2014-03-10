@@ -11,10 +11,21 @@ MAKE.decl('Arch', {
     bundlesLevelsRegexp : /^bundles$/
 });
 
-MAKE.decl('BundleNode', {
+MAKE.decl('SetsNode', {
+    getSets : function() {
+        return {
+            'game' : ['blocks']
+        };
+    },
 
+    getSourceTechs : function() {
+        return ['specs'];
+    }
+});
+
+MAKE.decl('BundleNode', {
     /**
-     * Технологии сборки бандла / примера
+     * Returns a list of techs to build a bundle
      * @returns {Array}
      */
     getTechs : function() {
@@ -30,13 +41,17 @@ MAKE.decl('BundleNode', {
     },
 
     /**
-     * Список технологий которые необходимо собирать в отдельном процессе
+     * Returns a list of techs that should be executed in separate process
      * @returns {Array}
      */
     getForkedTechs : function() {
         return this.__base().concat(['browser.js+bemhtml']);
     },
 
+    /**
+     * Returns a list of levels of definition to build a bundle
+     * @returns {*}
+     */
     getLevels : function() {
         return [
             'libs/bem-core/common.blocks',
@@ -48,5 +63,28 @@ MAKE.decl('BundleNode', {
         }, this)
         .concat(PATH.resolve(this.root, PATH.dirname(this.getNodePrefix()), 'blocks'));
     }
+});
 
+MAKE.decl('SpecNode', {
+    getTechs : function() {
+        return [
+            'bemjson.js',
+            'bemdecl.js',
+            'deps.js',
+            'css',
+            'spec.js+browser.js+bemhtml',
+            'bemhtml',
+            'html',
+            'phantomjs'
+        ];
+    },
+
+    getForkedTechs : function() {
+        return ['bemhtml', 'spec.js+browser.js+bemhtml'];
+    },
+
+    getLevels : function() {
+        return this.__base.apply(this, arguments)
+            .concat(environ.getLibPath('bem-pr', 'spec.blocks'));
+    }
 });

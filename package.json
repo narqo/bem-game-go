@@ -4,7 +4,7 @@
   "description": "Board game Go written with bem-core",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "bem make sets"
   },
   "repository": {
     "type": "git",
