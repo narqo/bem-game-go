@@ -4,8 +4,5 @@
     head : [
         { elem : 'css', url : '_index.css' },
         { elem : 'js', url : '_index.js' }
-    ],
-    content : {
-        block : 'go-game'
-    }
+    ]
 })

@@ -45,7 +45,8 @@ MAKE.decl('BundleNode', {
         ]
         .map(function(level) {
             return PATH.resolve(this.root, level);
-        }, this);
+        }, this)
+        .concat(PATH.resolve(this.root, PATH.dirname(this.getNodePrefix()), 'blocks'));
     }
 
 });

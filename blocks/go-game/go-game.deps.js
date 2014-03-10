@@ -8,7 +8,6 @@
             'info',
             'notification'
         ] },
-        'game',
         'board',
         'alert',
         'pass-button',

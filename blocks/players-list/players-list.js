@@ -17,6 +17,8 @@ provide(BEMDOM.decl(this.name, {
             'current');
     }
 }, {
+    live : true,
+
     build : function(game) {
         return {
             block : this.getName(),
