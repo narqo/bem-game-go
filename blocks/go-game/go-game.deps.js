@@ -1,6 +1,8 @@
 [{
+    mustDeps : [
+        { block : 'i-bem', elems : 'dom' }
+    ],
     shouldDeps : [
-        { block : 'i-bem', elems : 'dom' },
         { elems : [
             'board',
             'info',
@@ -16,9 +18,6 @@
 {
     tech : 'js',
     mustDeps : [
-        { block : 'i-bem', tech : 'bemhtml' },
-        { block : 'alert', tech : 'bemhtml' },
-        { block : 'pass-button', tech : 'bemhtml' },
-        { block : 'board', tech : 'bemhtml' },
+        { tech : 'bemhtml' }
     ]
 }]
