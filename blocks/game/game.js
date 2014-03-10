@@ -26,26 +26,52 @@ provide(inherit({
         return board;
     },
 
+    /**
+     * Whether player is in atari state
+     * @returns {Boolean}
+     */
     isInAtari : function() {
         return this._inAtari;
     },
 
+    /**
+     * Whether player attempted to make a suicide turn
+     * @returns {Boolean}
+     */
     isAttemptedSuicide : function() {
         return this._attempedSuicide;
     },
 
+    /**
+     * Whether game is over
+     * @returns {Boolean}
+     */
     isGameOver : function() {
         return this._gameOver;
     },
 
+    /**
+     * Returns size of the game
+     * @returns {Number}
+     */
     getSize : function() {
         return this._size;
     },
 
+    /**
+     * Returns current player color
+     * @returns {Number}
+     */
     getCurrentColor : function() {
         return this._currentColor;
     },
 
+    /**
+     * Returns game state in a given position
+     * @param {Number|Array} colOrPos
+     * @param {Number} [row]
+     * @returns {Number}
+     */
     getStateByPos : function(colOrPos, row) {
         var board = this._board;
         return typeof row === 'undefined'?
@@ -57,41 +83,41 @@ provide(inherit({
         this._currentColor = this._currentColor === BLACK? WHITE : BLACK;
     },
 
-    _getAdjacentIntersections : function(i, j) {
-        var neighbors = [],
+    _getAdjacentPoints : function(col, row) {
+        var points = [],
             size = this._size;
 
-        i > 0 && neighbors.push([i - 1, j]);
-        i < size - 1 && neighbors.push([i + 1, j]);
+        col > 0 && points.push([col - 1, row]);
+        col < size - 1 && points.push([col + 1, row]);
 
-        j > 0 && neighbors.push([i, j - 1]);
-        j < size -1 && neighbors.push([i, j + 1]);
+        row > 0 && points.push([col, row - 1]);
+        row < size -1 && points.push([col, row + 1]);
 
-        return neighbors;
+        return points;
     },
 
-    _getGroup : function(i, j) {
-        var color = this.getStateByPos(i, j);
-        if(color === EMPTY)
+    _getGroup : function(col, row) {
+        var state = this.getStateByPos(col, row);
+        if(state === EMPTY)
             return null;
 
         var visited = {},
             visitedList = [],
-            queue = [[i, j]],
+            queue = [[col, row]],
             liberties = 0,
             stone;
 
         while(stone = queue.pop()) {
             if(visited[stone]) continue;
 
-            this._getAdjacentIntersections(stone[0], stone[1]).forEach(function(n) {
-                var state = this.getStateByPos(n);
-                if(state === EMPTY) {
+            this._getAdjacentPoints(stone[0], stone[1]).forEach(function(pos) {
+                var stateInPos = this.getStateByPos(pos);
+                if(stateInPos === EMPTY) {
                     liberties++;
                     return;
                 }
 
-                state === color && queue.push([n[0], n[1]]);
+                stateInPos === state && queue.push([pos[0], pos[1]]);
             }, this);
 
             visited[stone] = true;
@@ -104,10 +130,13 @@ provide(inherit({
         };
     },
 
+    /**
+     * Pass current's player turn
+     * @returns {this}
+     */
     pass : function() {
-        if(this._lastMovePassed) {
+        if(this._lastMovePassed)
             return this.endGame();
-        }
 
         this._lastMovePassed = true;
         this._switchPlayer();
@@ -115,9 +144,16 @@ provide(inherit({
         return this;
     },
 
+    /**
+     * Make a turn
+     * Returns a flag whether this turn was possible to make
+     * @param {Number} col
+     * @param {Number} row
+     * @returns {Boolean}
+     */
     play : function(col, row) {
         if(this._gameOver)
-            throw new Error('The game is over already');
+            throw new Error('The game is already over');
 
         this._attempedSuicide = this._inAtari = false;
 
@@ -127,23 +163,20 @@ provide(inherit({
         }
 
         var color = this._board[col][row] = this._currentColor,
+            neighbors = this._getAdjacentPoints(col, row),
             captured = [],
-            neighbors = this._getAdjacentIntersections(col, row),
             atari = false;
 
-        neighbors.forEach(function(n) {
-            var state = this.getStateByPos(n);
-            if(state !== EMPTY && state !== color) {
-                var group = this._getGroup(n[0], n[1]),
-                    liberties = group.liberties;
+        neighbors.forEach(function(pos) {
+            var state = this.getStateByPos(pos);
+            if(state === EMPTY || state === color) return;
 
-                if(liberties === 0) {
-                    captured.push(group);
-                }
-                else if(liberties === 1) {
-                    atari = true;
-                }
-            }
+            var group = this._getGroup(pos[0], pos[1]),
+                liberties = group.liberties;
+
+            liberties === 0?
+                captured.push(group) :
+                liberties === 1 && (atari = true );
         }, this);
 
         // detect suicide
@@ -167,6 +200,10 @@ provide(inherit({
         return true;
     },
 
+    /**
+     * End the game
+     * @returns {this}
+     */
     endGame : function() {
         this._gameOver = true;
         return this;
