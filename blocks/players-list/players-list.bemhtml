@@ -1,0 +1,1 @@
+block('players-list').js()(true)
