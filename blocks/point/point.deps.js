@@ -5,6 +5,7 @@
     shouldDeps : [
         { block : 'jquery', elem : 'event', mods : { type : 'pointer' } },
         { mod : 'color' },
+        'player',
         'game'
     ]
 })

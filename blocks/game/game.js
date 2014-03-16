@@ -1,8 +1,8 @@
 modules.define('game', ['inherit'], function(provide, inherit) {
 
-var EMPTY = 0,
-    BLACK = 1,
-    WHITE = 2;
+var EMPTY = -1,
+    BLACK = 0,
+    WHITE = 1;
 
 provide(inherit({
     __constructor : function(size) {
@@ -13,6 +13,7 @@ provide(inherit({
         this._currentColor = BLACK;
         this._size = size;
         this._board = this._createBoard(size);
+        this._score = [0, 0];
     },
 
     _createBoard : function(size) {
@@ -77,6 +78,15 @@ provide(inherit({
         return typeof row === 'undefined'?
             board[colOrPos[0]][colOrPos[1]] :
             board[colOrPos][row];
+    },
+
+    /**
+     * Returns game points, optionally for given player
+     * @param {Number} [player]
+     * @returns {Array|Number}
+     */
+    getScore : function(player) {
+        return typeof player === 'undefined'? this._score : this._score[player];
     },
 
     _switchPlayer : function() {
@@ -162,7 +172,8 @@ provide(inherit({
             return false;
         }
 
-        var color = this._board[col][row] = this._currentColor,
+        var board = this._board,
+            color = board[col][row] = this._currentColor,
             neighbors = this._getAdjacentPoints(col, row),
             captured = [],
             atari = false;
@@ -176,20 +187,22 @@ provide(inherit({
 
             liberties === 0?
                 captured.push(group) :
-                liberties === 1 && (atari = true );
+                liberties === 1 && (atari = true);
         }, this);
 
         // detect suicide
         if(captured.length === 0 && this._getGroup(col, row).liberties === 0) {
-            this._board[col][row] = EMPTY;
+            board[col][row] = EMPTY;
             this._attempedSuicide = true;
             return false;
         }
 
         captured.forEach(function(group) {
-            group.stones.forEach(function(stone) {
-                this._board[stone[0]][stone[1]] = EMPTY;
-            }, this);
+            var stones = group.stones;
+            stones.forEach(function(stone) {
+                board[stone[0]][stone[1]] = EMPTY;
+            });
+            this._score[this._currentColor] += stones.length;
         }, this);
 
         this._inAtari = atari;

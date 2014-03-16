@@ -2,13 +2,3 @@
 {
     padding: 0 0 7px;
 }
-
-.players-list__player_current:before
-{
-    content: '☛';
-
-    position: absolute;
-
-    line-height: 1;
-    margin-left: -1.3em;
-}
