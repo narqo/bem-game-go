@@ -69,9 +69,7 @@ provide(BEMDOM.decl(block, {
     },
 
     _onPassClick : function() {
-        this
-            ._getPlayersList()
-            .update(this._getGame().pass());
+        this._getPlayersList().update(this._getGame().pass());
     }
 }, {
     live : function() {
