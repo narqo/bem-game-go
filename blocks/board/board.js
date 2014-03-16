@@ -8,10 +8,11 @@ provide(BEMDOM.decl(this.name, {
         return this._points || (this._points = this.findBlocksInside('point'));
     },
 
-    updateBoard : function(game) {
+    update : function(game) {
         this._getPoints().forEach(function(point) {
             point.setState(game.getStateByPos(point.getCol(), point.getRow()));
         });
+        return this;
     },
 
     _onPointClick : function(point) {

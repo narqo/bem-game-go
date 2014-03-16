@@ -9,6 +9,10 @@ provide(BEMDOM.decl(this.name, {
         }
     },
 
+    getColor : function() {
+        return this.params.color
+    },
+
     getVal : function() {
         return this._val;
     },
@@ -29,7 +33,7 @@ provide(BEMDOM.decl(this.name, {
         return {
             block : this.getName(),
             mods : { color : isBlack? 'black' : 'white' },
-            js : { val : val },
+            js : { val : val, color : color },
             content : [
                 isBlack? 'BLACK' : 'WHITE',
                 { elem : 'score', content : val }

@@ -81,12 +81,12 @@ provide(inherit({
     },
 
     /**
-     * Returns game points, optionally for given player
-     * @param {Number} [player]
+     * Returns game score
+     * @param {Numner} [color]
      * @returns {Array|Number}
      */
-    getScore : function(player) {
-        return typeof player === 'undefined'? this._score : this._score[player];
+    getScore : function(color) {
+        return typeof color === 'undefined'? this._score : this._score[color];
     },
 
     _switchPlayer : function() {

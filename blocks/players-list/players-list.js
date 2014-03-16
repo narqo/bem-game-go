@@ -14,14 +14,15 @@ provide(BEMDOM.decl(this.name, {
             (this._players = this.findBlocksInside('player'));
     },
 
-    updateInformer : function(game) {
-        var currentColorMod = game.getCurrentColor() === Game.BLACK? 'black' : 'white';
+    update : function(game) {
+        var currentColor = game.getCurrentColor(),
+            color;
         this._getPlayers().forEach(function(player) {
+            color = player.getColor();
             player
-                .setVal(game.getScore(player.getMod('color') === 'black'? Game.BLACK : Game.WHITE))
-                .toggleMod('current', true, '', player.hasMod('color', currentColorMod));
+                .setVal(game.getScore(color))
+                .toggleMod('current', true, '', color === currentColor);
         });
-
         return this;
     }
 }, {

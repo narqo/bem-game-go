@@ -63,15 +63,15 @@ provide(BEMDOM.decl(block, {
         this._notify();
 
         if(isPlayed) {
-            this._getBoard().updateBoard(game);
-            this._getPlayersList().updateInformer(game);
+            this._getBoard().update(game);
+            this._getPlayersList().update(game);
         }
     },
 
     _onPassClick : function() {
         this
             ._getPlayersList()
-            .updateInformer(this._getGame().pass());
+            .update(this._getGame().pass());
     }
 }, {
     live : function() {
