@@ -35,7 +35,7 @@ After all dependencies were installed, run:
 › npm test
 ```
 
-This will build all specs files and process them throgh the [PhantonJS][3] headless browser.
+This will build all specs files and process them throgh the [PhantomJS][3] headless browser.
 
 [1]: http://cjlarose.com/2014/01/09/react-board-game-tutorial.html
 [2]: https://github.com/bem/bem-core/
