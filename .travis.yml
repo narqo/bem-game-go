@@ -1,7 +1,24 @@
 language: node_js
+
 node_js:
-  - "0.10"
+  - 0.1
+
+env:
+  global:
+    - ISTANBUL_COVERAGE="yes"
+
+branches:
+  only:
+    - master
+
+before_script:
+  - npm install coveralls
+
 install:
   - npm install
   - bower-npm-install
+
+after_success:
+  - ./node_modules/.bin/istanbul report lcovonly
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && echo "Coverage data was sent to coveralls!"
 
