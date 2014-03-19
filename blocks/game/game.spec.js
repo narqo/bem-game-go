@@ -34,6 +34,10 @@ describe('game', function() {
                 }
             }
         });
+
+        it('initial score should be zeros', function() {
+            game.getScore().should.be.eql([0, 0]);
+        });
     });
 
     describe('#play()', function() {
