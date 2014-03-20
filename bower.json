@@ -9,7 +9,7 @@
     "bem-core": "bem/bem-core#^2.0.0"
   },
   "devDependencies": {
-    "bem-pr": "narqo/bem-pr#^0.7.x"
+    "bem-pr": "narqo/bem-pr#^0.6.x"
   },
   "license": "WTFPL",
   "private": true
