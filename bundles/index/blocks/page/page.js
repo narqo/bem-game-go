@@ -7,7 +7,9 @@ provide(BEMDOM.decl(this.name, {
         'js' : {
             'inited' : function() {
                 modules.require(['go-game', 'game'], function(GoGame, Game) {
-                    GoGame.create(this.domElem, new Game(GAME_SIZE));
+                    BEMDOM.append(
+                        this.domElem,
+                        GoGame.create(new Game(GAME_SIZE)).domElem);
                 }.bind(this));
             }
         }

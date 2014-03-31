@@ -1,7 +1,7 @@
 modules.define(
     'go-game',
-    ['i-bem__dom', 'BEMHTML', 'board', 'alert', 'players-list', 'pass-button'],
-    function(provide, BEMDOM, BEMHTML, Board, Alert, PlayersList, PassButton) {
+    ['i-bem__dom', 'BEMHTML', 'jquery', 'board', 'alert', 'players-list', 'pass-button'],
+    function(provide, BEMDOM, BEMHTML, $, Board, Alert, PlayersList, PassButton) {
 
 var block = this.name;
 
@@ -44,15 +44,15 @@ provide(BEMDOM.decl(block, {
             alert = this._getAlert(),
             msg;
 
-        if(game.isInAtari())
+        if(game.isGameOver())
+            msg = 'GAME OVER';
+        else if(game.isInAtari())
             msg = 'ATARI';
         else if(game.isAttemptedSuicide())
             msg = 'SUICIDE';
-        else if(game.isGameOver())
-            msg = 'GAME OVER';
 
         msg?
-            alert.show('ATARI') :
+            alert.show(msg) :
             alert.hide();
     },
 
@@ -70,6 +70,7 @@ provide(BEMDOM.decl(block, {
 
     _onPassClick : function() {
         this._getPlayersList().update(this._getGame().pass());
+        this._notify();
     }
 }, {
     live : function() {
@@ -82,9 +83,8 @@ provide(BEMDOM.decl(block, {
             });
     },
 
-    create : function(domElem, game) {
-        BEMDOM
-            .append(domElem, BEMHTML.apply(this.build(game)))
+    create : function(game) {
+        return $(BEMHTML.apply(this.build(game)))
             .bem(block)
             ._setGame(game);
     },
