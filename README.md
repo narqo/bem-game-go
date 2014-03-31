@@ -1,5 +1,7 @@
 # Let's Go! With BEM [![Build Status](https://travis-ci.org/narqo/bem-game-go.svg?branch=master)](https://travis-ci.org/narqo/bem-game-go)
 
+[![Coverage Status](https://coveralls.io/repos/narqo/bem-game-go/badge.png)](https://coveralls.io/r/narqo/bem-game-go)
+
 A port of "[React beginner tutorial: implementing the board game Go][1]" on top of [bem-core][1] library.
 
 ## How to build
