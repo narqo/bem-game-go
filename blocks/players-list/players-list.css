@@ -1,4 +1,9 @@
 .players-list
 {
-    padding-bottom: 20px;
+    background: #fff;
+
+    border: 1px solid rgba(0, 0, 0, .06);
+
+    padding: 20px 43px;
+    margin: 25px 0;
 }

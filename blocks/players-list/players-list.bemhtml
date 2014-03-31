@@ -1,1 +1,4 @@
-block('players-list').js()(true)
+block('players-list')(
+    js()(true),
+    mix()({ block: 'clearfix' })
+)

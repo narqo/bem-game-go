@@ -1,7 +1,7 @@
 modules.define('point', ['i-bem__dom', 'game'], function(provide, BEMDOM, Game) {
 
 /** {Number} css size of the point */
-var POINT_SIZE = 30;
+var POINT_SIZE = 40;
 
 provide(BEMDOM.decl(this.name, {
     getCol : function() {

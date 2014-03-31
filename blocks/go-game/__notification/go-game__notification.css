@@ -1,4 +1,6 @@
 .go-game__notification
 {
-    height: 50px;
+    height: 90px;
+
+    text-align: center;
 }

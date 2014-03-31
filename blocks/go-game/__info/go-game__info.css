@@ -1,4 +1,6 @@
 .go-game__info
 {
-    padding: 17px 0 0 50px;
+    padding: 20px 0;
+
+    text-align: center;
 }

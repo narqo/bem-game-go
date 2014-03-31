@@ -1,4 +1,11 @@
 .players-list__player
 {
-    padding: 0 0 7px;
+    float: left;
+}
+
+.players-list__player.player_color_white
+{
+    float: right;
+
+    text-align: right;
 }

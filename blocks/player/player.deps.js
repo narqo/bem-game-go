@@ -2,5 +2,8 @@
     mustDeps : [
         { block : 'i-bem', elems : 'dom' }
     ],
-    shouldDeps : { mod : 'current' }
+    shouldDeps : [
+        { elem : 'score' },
+        { mod : 'current' }
+    ]
 })

@@ -1,7 +1,6 @@
-.go-game__board,
-.go-game__info
+.go-game
 {
-    display: table-cell;
+    display: table;
 
-    vertical-align: top;
+    margin: 0 auto;
 }

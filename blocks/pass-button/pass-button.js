@@ -12,7 +12,7 @@ provide(BEMDOM.decl(this.name, {
     },
 
     build : function() {
-        return { block : this.getName(), content : 'PASS' };
+        return { block : this.getName(), content : 'PASS TURN' };
     }
 }));
 

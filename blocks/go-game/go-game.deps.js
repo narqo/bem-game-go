@@ -8,6 +8,7 @@
             'info',
             'notification'
         ] },
+        'jquery',
         'board',
         'alert',
         'pass-button',
