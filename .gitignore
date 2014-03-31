@@ -7,4 +7,6 @@ bundles/*/*
 !bundles/*/blocks
 !bundles/.bem/*
 
+coverage.json
+coverage/
 /*.specs

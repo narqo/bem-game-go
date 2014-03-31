@@ -1,10 +1,17 @@
+/** @module game */
+
 modules.define('game', ['inherit'], function(provide, inherit) {
 
 var EMPTY = -1,
     BLACK = 0,
     WHITE = 1;
 
-provide(inherit({
+/**
+ * @class Game
+ * @exports
+ */
+
+provide(inherit( /** @lends Game.prototype */{
     __constructor : function(size) {
         this._lastMovePassed = false;
         this._inAtari = false;
@@ -221,7 +228,7 @@ provide(inherit({
         this._gameOver = true;
         return this;
     }
-}, {
+}, /** @lends Game */{
     EMPTY : EMPTY,
     BLACK : BLACK,
     WHITE : WHITE

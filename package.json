@@ -4,7 +4,9 @@
   "description": "Board game Go written with bem-core",
   "main": "index.js",
   "scripts": {
-    "test": "bem make sets"
+    "jsdoc": "bem make game.jsdoc",
+    "test": "bem make game.specs",
+    "coverage": "ISTANBUL_COVERAGE=yes npm test"
   },
   "repository": {
     "type": "git",
@@ -18,7 +20,8 @@
   "homepage": "https://github.com/narqo/bem-game-go",
   "devDependencies": {
     "bower-npm-install": "~0.5.4",
-    "bem": "~0.7.8"
+    "bem": "~0.7.8",
+    "istanbul": "~0.2.7"
   },
   "dependencies": {
     "bem-environ": "~1.4.0"
