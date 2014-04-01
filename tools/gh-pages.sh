@@ -6,6 +6,7 @@ cd gh-pages
 git init
 git config --global user.name "Travis CI"
 git config --global user.email "travis@travis-ci.org"
+touch .nojekyll
 cp -f ../bundles/index/index.html ./
 cp -f ../bundles/index/_index.css ./
 cp -f ../bundles/index/_index.js  ./
