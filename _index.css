@@ -1,0 +1,231 @@
+/* ../../blocks/page/page.css begin */
+.page
+{
+    background: #f6f5f3;
+
+    font: 15px Arial, Helvetica, sans-serif;
+
+    margin: 0;
+    padding: 0;
+}
+
+/* ../../blocks/page/page.css end */
+/* ../../blocks/gh-ribbon/gh-ribbon.css begin */
+.gh-ribbon__fork-me
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* ../../blocks/gh-ribbon/gh-ribbon.css end */
+/* ../../blocks/go-game/go-game.css begin */
+.go-game
+{
+    display: table;
+
+    margin: 0 auto;
+}
+
+/* ../../blocks/go-game/go-game.css end */
+/* ../../blocks/go-game/__board/go-game__board.css begin */
+
+/* ../../blocks/go-game/__board/go-game__board.css end */
+/* ../../blocks/go-game/__info/go-game__info.css begin */
+.go-game__info
+{
+    padding: 20px 0;
+
+    text-align: center;
+}
+
+/* ../../blocks/go-game/__info/go-game__info.css end */
+/* ../../blocks/go-game/__notification/go-game__notification.css begin */
+.go-game__notification
+{
+    height: 90px;
+
+    text-align: center;
+}
+
+/* ../../blocks/go-game/__notification/go-game__notification.css end */
+/* ../../blocks/board/board.css begin */
+.board
+{
+    background: #e9c372;
+    border: 1px solid #522;
+
+    -webkit-user-select: none;
+
+    position: relative;
+}
+
+/* ../../blocks/board/board.css end */
+/* ../../blocks/point/point.css begin */
+.point
+{
+    width: 40px;
+    height: 40px;
+
+    position: absolute;
+}
+
+.point:after,
+.point:before
+{
+    border: 1px solid #522;
+
+    content: '';
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.point:after
+{
+    border-width: 0 0 0 1px;
+    left: 50%;
+}
+
+.point:before
+{
+    border-width: 1px 0 0;
+    top: 50%;
+}
+
+.point_first-col:after
+{
+    top: 50%;
+}
+.point_last-col:after
+{
+    bottom: 50%;
+}
+
+.point_first-row:before
+{
+    left: 50%;
+}
+
+.point_last-row:before
+{
+    right: 50%;
+}
+
+/* ../../blocks/point/point.css end */
+/* ../../blocks/point/_color/point_color.css begin */
+.point_color_white,
+.point_color_black
+{
+    border-radius: 50%;
+
+    box-sizing: border-box;
+
+    width: 38px;
+    height: 38px;
+    margin: 1px 0 0 1px;
+}
+
+.point_color_white:after,
+.point_color_black:after,
+.point_color_white:before,
+.point_color_black:before
+{
+    display: none;
+}
+
+.point_color_white
+{
+    background: #fff;
+
+    box-shadow: 1px 1px 1px #404040 , inset -3px -3px 5px gray;
+}
+
+.point_color_black
+{
+    background: #000;
+    background-image: -webkit-radial-gradient(40% 40%, circle closest-corner, #404040 0%, transparent 90%);
+
+    box-shadow: 1px 1px 1px #404040;
+}
+
+/* ../../blocks/point/_color/point_color.css end */
+/* ../../blocks/player/__score/player__score.css begin */
+.player__score
+{
+    display: inline;
+
+    margin-left: 5px;
+}
+
+/* ../../blocks/player/__score/player__score.css end */
+/* ../../blocks/player/_current/player_current.css begin */
+.player_current:before
+{
+    content: '☛';
+
+    position: absolute;
+
+    line-height: 1;
+    margin-left: -1.3em;
+}
+
+/* ../../blocks/player/_current/player_current.css end */
+/* ../../blocks/alert/alert.css begin */
+.alert
+{
+    display: none;
+
+    font-size: 24px;
+    line-height: 70px;
+}
+
+/* ../../blocks/alert/alert.css end */
+/* ../../blocks/alert/_visible/alert_visible.css begin */
+.alert_visible
+{
+    display: block;
+}
+
+/* ../../blocks/alert/_visible/alert_visible.css end */
+/* ../../blocks/players-list/players-list.css begin */
+.players-list
+{
+    background: #fff;
+
+    border: 1px solid rgba(0, 0, 0, .06);
+
+    padding: 20px 43px;
+    margin: 25px 0;
+}
+
+/* ../../blocks/players-list/players-list.css end */
+/* ../../blocks/players-list/__player/players-list__player.css begin */
+.players-list__player
+{
+    float: left;
+}
+
+.players-list__player.player_color_white
+{
+    float: right;
+
+    text-align: right;
+}
+
+/* ../../blocks/players-list/__player/players-list__player.css end */
+/* ../../libs/bem-core/common.blocks/clearfix/clearfix.css begin */
+.clearfix:after
+{
+    display: block;
+    clear: both;
+
+    height: 0;
+
+    content: " ";
+}
+
+/* ../../libs/bem-core/common.blocks/clearfix/clearfix.css end */
