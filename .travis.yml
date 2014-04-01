@@ -1,24 +1,27 @@
 language: node_js
 
 node_js:
-  - 0.1
+- 0.1
 
 env:
-  global:
-    - ISTANBUL_COVERAGE="yes"
+ global:
+ - GH_REF: github.com/narqo/bem-game-go.git
+ - secure: UKU+zdI1HkwTT7T3gqLeeUg2nkjNDYmMGYVEpJTEL+kBXCG62N5OWE6HWVh9nNukV9YtfpiqMH14mZcGu/Ay72q6xrX1Z/XQYco6Evh74stOuBRs0wVZaQqA/XNcL6DPAXdH2B4nqoVPZO38SrKBR2xpFSALdMXwW8lXpbnTccs=
+ - ISTANBUL_COVERAGE="yes"
 
 branches:
-  only:
-    - master
+ only:
+ - master
 
 before_script:
-  - npm install coveralls
+- npm install coveralls
 
 install:
-  - npm install
-  - bower-npm-install
+- npm install
+- bower-npm-install
 
 after_success:
-  - ./node_modules/.bin/istanbul report lcovonly
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && echo "Coverage data was sent to coveralls!"
+- ./node_modules/.bin/istanbul report lcovonly
+- cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && echo "Coverage data was sent to coveralls!"
+- '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && npm run deploy || "false"'
 
