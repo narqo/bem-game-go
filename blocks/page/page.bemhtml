@@ -1,0 +1,1 @@
+block('page').elem('body').content()([{ block : 'gh-ribbon' }, this.ctx.content])
