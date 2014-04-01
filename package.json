@@ -2,11 +2,11 @@
   "name": "bem-game-go",
   "version": "0.1.0",
   "description": "Board game Go written with bem-core",
-  "main": "index.js",
   "scripts": {
     "jsdoc": "bem make game.jsdoc",
     "test": "bem make game.specs",
-    "coverage": "ISTANBUL_COVERAGE=yes npm test"
+    "coverage": "ISTANBUL_COVERAGE=yes npm test",
+    "deploy": "./tools/gh-pages.sh"
   },
   "repository": {
     "type": "git",
