@@ -15,9 +15,9 @@ describe('game', function() {
             Game.WHITE.should.not.be.equal(Game.EMPTY);
         });
 
-        it('should return proper game size', function() {
-            game.getSize().should.be.equal(gameSize);
-        });
+        //it('should return proper game size', function() {
+        //    game.getSize().should.be.equal(gameSize);
+        //});
 
         it('should not become over from the beginning', function() {
             game.isGameOver().should.not.be.true;
