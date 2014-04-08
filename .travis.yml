@@ -5,9 +5,10 @@ node_js:
 
 env:
  global:
- - GH_REF: github.com/narqo/bem-game-go.git
  - secure: UKU+zdI1HkwTT7T3gqLeeUg2nkjNDYmMGYVEpJTEL+kBXCG62N5OWE6HWVh9nNukV9YtfpiqMH14mZcGu/Ay72q6xrX1Z/XQYco6Evh74stOuBRs0wVZaQqA/XNcL6DPAXdH2B4nqoVPZO38SrKBR2xpFSALdMXwW8lXpbnTccs=
- - ISTANBUL_COVERAGE="yes"
+ - secure: M+2njOYorfDhK+ms7kSGxu6rrLWDXUn6dy+vUkvv7oDrs1dDvNJjFXWLAFzAsD1icn1O48y46IIi+XTjuwcuHrhc+lNIAHfKUgJam8cul7fkgii6zh20m1byjInFVwpQgLXR4b6d5vtEhHQCNeVgm6/zM60YqScY7uov2YWzN+s=
+ - GH_REF: github.com/narqo/bem-game-go.git
+ - ISTANBUL_COVERAGE: yes
 
 branches:
  only:
