@@ -85,6 +85,6 @@ MAKE.decl('SpecNode', {
 
     getLevels : function() {
         return this.__base.apply(this, arguments)
-            .concat(environ.getLibPath('bem-pr', 'spec.blocks'));
+            .concat('libs/bem-pr/spec.blocks'));
     }
 });
